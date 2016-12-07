@@ -76,9 +76,14 @@ QUnit.test('it generates the appropriate payload for bugsnag', function(assert) 
 
     let params = query.split('&');
     let paramMap = {};
+    let decodeParam = (value) => {
+      value = value.replace(/\+/g, '%20');
+      value = decodeURIComponent(value);
+      return value;
+    };
     params.forEach((queryParam) => {
       let [paramName, paramValue] = queryParam.split('=');
-      paramMap[decodeURIComponent(paramName)] = decodeURIComponent(paramValue);
+      paramMap[decodeParam(paramName)] = decodeParam(paramValue);
     });
     assert.equal(paramMap.apiKey, 'my-api-key', 'Api key is passed in payload.');
     assert.equal(paramMap.projectRoot, 'application-url-hash', 'Project root is passed in payload.');
