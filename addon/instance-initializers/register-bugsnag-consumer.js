@@ -22,5 +22,5 @@ export default function registerBugsnagConsumer(instance, config) {
   loggingService = instance.lookup('service:logger');
   levels = addonOptions.levels || loggingService.levels.error;
   tags = addonOptions.tags || 'error';
-  loggingService.registerConsumer('ember-logging-bugsnag', [consumerService.get('loggerCallback'), consumerService], levels, tags, config.environment);
+  loggingService.registerConsumer('ember-logging-bugsnag', [consumerService.get('loggerCallback'), consumerService], levels, tags);
 }
