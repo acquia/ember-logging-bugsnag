@@ -17,6 +17,7 @@ export default function registerBugsnagConsumer(instance, config) {
   consumerService = instance.lookup('service:bugsnagLoggingConsumer');
   consumerService.set('apiKey', addonOptions.key);
   consumerService.set('apiUrl', addonOptions.url);
+  consumerService.set('currentEnvironment', config.environment);
 
   // Register the consumer service with the logger.
   loggingService = instance.lookup('service:logger');

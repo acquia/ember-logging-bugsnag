@@ -8,24 +8,25 @@ export default Ember.Service.extend({
    *
    * The callback will receive the event context as a paramter and should return
    * an object with the following keys:
-   *   urlHash             The current url hash
+   *   projectRoot         The root context of the application (domain, etc.)
+   *   appVersion          The version number for this application
    *   url                 The application url
-   *   environment         The current application environment
-   *   applicationVersion  The version number for this application
    *   userId              An ID for the current user
-   *   route               The current application route
+   *   file                The file of the error (typically the route)
    * Additionally the following optional information will be included in the
    * bugsnag report if passed
+   *   releaseStage        The current application stage, will default to
+   *                       the current environment name.
    *   userAgent           The current user agent string
    *   language            The user's language settings
-   *   metadata            An object of application-specific metadata
+   *   metaData            An object of application-specific metadata
    *
    * @property applicationContextCallback
    * @type {Function}
    * @public
    */
   applicationContextCallback: null,
-
+  
   /**
    * The BugSnag API key from configuration
    * @property apiKey
@@ -41,6 +42,14 @@ export default Ember.Service.extend({
    * @public
    */
   apiUrl: null,
+
+  /**
+   * The current application environment
+   * @property currentEnvironment
+   * @type {String}
+   * @public
+   */
+  currentEnvironment: null,
 
   /**
    * Bugsnag callback function for logger
@@ -67,17 +76,17 @@ export default Ember.Service.extend({
     let payload = {
       notifierVersion: '1.0',
       apiKey,
-      projectRoot: appContext.urlHash,
+      projectRoot: appContext.projectRoot,
       context: event.metadata.error ? event.metadata.error.name : event.name,
       userId: appContext.userId,
-      releaseStage: appContext.environment,
-      appVersion: appContext.applicationVersion,
+      releaseStage: appContext.releaseStage || this.get('currentEnvironment'),
+      appVersion: appContext.appVersion,
       url: appContext.url,
       severity: event.level,
       name: event.metadata.error ? event.metadata.error.name : event.name,
       message: event.metadata.error ? event.metadata.error.message : event.type,
       stacktrace: event.metadata.error ? event.metadata.error.stack : '',
-      file: appContext.route,
+      file: appContext.file,
       lineNumber: '0',
       payloadVersion: '2'
     };
@@ -88,7 +97,7 @@ export default Ember.Service.extend({
       payload.language = appContext.language;
     }
     if (appContext.hasOwnProperty('metadata')) {
-      payload.metaData = appContext.metadata;
+      payload.metaData = appContext.metaData;
     }
     this._sendPayload(this._generateBugsnagUrl(payload, apiUrl));
   },
