@@ -66,7 +66,7 @@ export default Ember.Service.extend({
     });
     let payload = {
       notifierVersion: '1.0',
-      apiKey: apiKey,
+      apiKey,
       projectRoot: appContext.urlHash,
       context: event.metadata.error ? event.metadata.error.name : event.name,
       userId: appContext.userId,
@@ -88,7 +88,7 @@ export default Ember.Service.extend({
       payload.language = appContext.language;
     }
     if (appContext.hasOwnProperty('metadata')) {
-      payload.metadata = appContext.metadata;
+      payload.metaData = appContext.metadata;
     }
     this._sendPayload(this._generateBugsnagUrl(payload, apiUrl));
   },

@@ -98,8 +98,8 @@ QUnit.test('it generates the appropriate payload for bugsnag', function(assert) 
     assert.equal(paramMap.stacktrace, 'Testing error stack', 'Error stack trace is sent with payload.');
     assert.equal(paramMap.userAgent, 'user-agent', 'User agent is sent with payload.');
     assert.equal(paramMap.language, 'user-language', 'Language is sent with payload.');
-    assert.deepEqual(paramMap['metadata[appstuff][clientId]'], 'application-client-id', 'App-specific metadata client id is sent with payload.');
-    assert.deepEqual(paramMap['metadata[appstuff][siteId]'], 'application-site-id', 'App-specific metadata site id is sent with payload.');
+    assert.deepEqual(paramMap['metaData[appstuff][clientId]'], 'application-client-id', 'App-specific metadata client id is sent with payload.');
+    assert.deepEqual(paramMap['metaData[appstuff][siteId]'], 'application-site-id', 'App-specific metadata site id is sent with payload.');
   };
   service.set('_sendPayload', sendPayloadMock);
   service.loggerCallback(event, context);
