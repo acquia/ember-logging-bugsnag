@@ -13,21 +13,20 @@ QUnit.test('it has publically accessible methods', function(assert) {
 QUnit.test('it generates the appropriate payload for bugsnag', function(assert) {
   assert.expect(16);
 
-  let service = BugsnagLoggingConsumer.create();
+  let service = BugsnagLoggingConsumer.create({ currentEnvironment: 'unit-testing-environment' });
   let apiKey = 'my-api-key';
   let apiUrl = 'my-bugsnag-url';
 
   let contextCallback = (context) => {
     return {
       url: context.application.url,
-      urlHash: context.application.urlHash,
-      environment: context.application.environment,
-      applicationVersion: context.application.version,
-      route: context.application.route,
+      projectRoot: context.application.urlHash,
+      appVersion: context.application.version,
+      file: context.application.route,
       userId: context.user.id,
       userAgent: context.user.userAgent,
       language: context.user.language,
-      metadata: {
+      metaData: {
         appstuff: {
           clientId: context.application.clientId,
           siteId: context.application.siteId

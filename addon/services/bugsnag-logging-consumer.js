@@ -69,10 +69,6 @@ export default Ember.Service.extend({
       return;
     }
     let appContext = callback(context);
-    let required = ['urlHash', 'url', 'userId', 'environment', 'applicationVersion', 'route'];
-    required.forEach((prop) => {
-      Ember.assert(`Application context callback for bugsnag must include ${prop}.`, appContext.hasOwnProperty(prop));
-    });
     let payload = {
       notifierVersion: '1.0',
       apiKey,
@@ -96,7 +92,7 @@ export default Ember.Service.extend({
     if (appContext.hasOwnProperty('language')) {
       payload.language = appContext.language;
     }
-    if (appContext.hasOwnProperty('metadata')) {
+    if (appContext.hasOwnProperty('metaData')) {
       payload.metaData = appContext.metaData;
     }
     this._sendPayload(this._generateBugsnagUrl(payload, apiUrl));

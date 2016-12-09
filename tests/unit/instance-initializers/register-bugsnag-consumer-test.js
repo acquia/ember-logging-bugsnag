@@ -17,12 +17,11 @@ test('it configures the logging consumer', function(assert) {
     }
   };
   let loggerMock = Ember.Service.create({
-    registerConsumer(id, callback, levels, tags, environment) {
+    registerConsumer(id, callback, levels, tags) {
       assert.equal(id, 'ember-logging-bugsnag', 'Consumer is given a unique ID.');
       assert.ok(Ember.isArray(callback), 'A callback array is provided.');
       assert.equal(levels, 'error', 'The default level is provided.');
       assert.deepEqual(tags, 'error', 'The default tags are provided.');
-      assert.equal(environment, 'unit-testing', 'The current environment is sent.');
     },
     levels: {
       error: 'error'
@@ -43,4 +42,5 @@ test('it configures the logging consumer', function(assert) {
   registerBugsnagConsumer(instanceMock, environmentMock);
   assert.equal(consumer.get('apiKey'), 'my-api-key', 'The api key is stored on the consumer.');
   assert.equal(consumer.get('apiUrl'), 'my-api-url', 'The api url is stored on the consumer.');
+  assert.equal(consumer.get('currentEnvironment'), 'unit-testing', 'The current environment is stored on the consumer.');
 });
