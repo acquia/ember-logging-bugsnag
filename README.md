@@ -75,13 +75,16 @@ export default Ember.Component.extend({
   }
 });
 ```
+The logging mechanism will automatically call the ember-logging-bugsnag consumer
+and send the error information on to Bugsnag.
+
 # Developing for ember-logging-bugsnag
 
 This README outlines the details of collaborating on this Ember addon.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
+* `git clone git@github.com:acquia/ember-logging-bugsnag.git` this repository
 * `cd ember-logging-bugsnag`
 * `npm install`
 * `bower install`
