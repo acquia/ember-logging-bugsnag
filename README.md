@@ -1,7 +1,7 @@
 # ember-logging-bugsnag
 
-This addon provides a logging consumer for the [https://github.com/acquia/ember-logging-service/|ember-logging-service] addon.
-The consumer handles sending any error events to the [https://bugsnag.com/|Bugsnag] service.
+This addon provides a logging consumer for the [ember-logging-service](https://github.com/acquia/ember-logging-service/) addon.
+The consumer handles sending any error events to the [Bugsnag](https://bugsnag.com/) service.
 
 ## Configuration
 
