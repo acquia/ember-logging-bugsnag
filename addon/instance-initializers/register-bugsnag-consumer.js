@@ -8,9 +8,12 @@ export default function registerBugsnagConsumer(instance, config) {
   if (!addonOptions.enabled) {
     return;
   }
-  // Must be configured with the bugsnag key and url.
-  if (Ember.isEmpty(addonOptions.key) || Ember.isEmpty(addonOptions.url)) {
+  // Must be configured with the bugsnag key
+  if (Ember.isEmpty(addonOptions.key)) {
     return;
+  }
+  if (Ember.isEmpty(addonOptions.url)) {
+    addonOptions.url = 'https://notify.bugsnag.com/js';
   }
 
   // Set up the consumer service.
