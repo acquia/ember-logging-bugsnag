@@ -36,7 +36,7 @@ ENV['ember-logging-bugsnag'] = {
 The key can be found in your Bugsnag dashboard in the "Projects" section of you
 "Settings".  
 
-The url is the notification URL that is reported for the API https://docs.bugsnag.com/api/error-reporting/#api-overview
+The url is the notification URL that is reported for the [API](https://docs.bugsnag.com/api/error-reporting/#api-overview).
 This defaults to https://notify.bugsnag.com/js.
 
 # Configuring application-specific information
