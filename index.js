@@ -2,5 +2,8 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-logging-bugsnag'
+  name: 'ember-logging-bugsnag',
+  isDevelopingAddon: function() {
+    return true;
+  }
 };
