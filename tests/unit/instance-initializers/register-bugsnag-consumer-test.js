@@ -3,6 +3,11 @@ import registerBugsnagConsumer from 'ember-logging-bugsnag/instance-initializers
 import BugsnagLoggingConsumer from 'ember-logging-bugsnag/services/bugsnag-logging-consumer';
 import Ember from 'ember';
 
+const {
+  isArray,
+  Service
+} = Ember;
+
 module('Unit | Instance Initializers | register-bugsnag-consumer');
 
 test('it configures the logging consumer', function(assert) {
@@ -16,10 +21,10 @@ test('it configures the logging consumer', function(assert) {
       url: 'my-api-url'
     }
   };
-  let loggerMock = Ember.Service.create({
+  let loggerMock = Service.create({
     registerConsumer(id, callback, levels, tags) {
       assert.equal(id, 'ember-logging-bugsnag', 'Consumer is given a unique ID.');
-      assert.ok(Ember.isArray(callback), 'A callback array is provided.');
+      assert.ok(isArray(callback), 'A callback array is provided.');
       assert.equal(levels, 'error', 'The default level is provided.');
       assert.deepEqual(tags, 'error', 'The default tags are provided.');
     },
@@ -31,7 +36,7 @@ test('it configures the logging consumer', function(assert) {
   let instanceMock = {
     lookup(factoryName) {
       if (factoryName === 'service:bugsnagLoggingConsumer') {
-        return consumer;        
+        return consumer;
       }
       if (factoryName === 'service:logger') {
         return loggerMock;

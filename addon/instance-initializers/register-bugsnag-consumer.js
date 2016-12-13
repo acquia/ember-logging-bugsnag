@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+const { isEmpty } = Ember;
+
 export default function registerBugsnagConsumer(instance, config) {
   let loggingService, consumerService, levels, tags;
 
@@ -9,10 +11,10 @@ export default function registerBugsnagConsumer(instance, config) {
     return;
   }
   // Must be configured with the bugsnag key
-  if (Ember.isEmpty(addonOptions.key)) {
+  if (isEmpty(addonOptions.key)) {
     return;
   }
-  if (Ember.isEmpty(addonOptions.url)) {
+  if (isEmpty(addonOptions.url)) {
     addonOptions.url = 'https://notify.bugsnag.com/js';
   }
 

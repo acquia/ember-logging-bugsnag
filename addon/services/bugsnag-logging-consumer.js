@@ -1,6 +1,13 @@
 import Ember from 'ember';
 
-export default Ember.Service.extend({
+const {
+  $,
+  isEmpty,
+  Service,
+  typeOf
+} = Ember;
+
+export default Service.extend({
 
   /**
    * A callback that is used to generate the bugsnag specific context
@@ -26,7 +33,7 @@ export default Ember.Service.extend({
    * @public
    */
   applicationContextCallback: null,
-  
+
   /**
    * The BugSnag API key from configuration
    * @property apiKey
@@ -62,10 +69,10 @@ export default Ember.Service.extend({
     let callback = this.get('applicationContextCallback');
     let apiKey = this.get('apiKey');
     let apiUrl = this.get('apiUrl');
-    if (Ember.isEmpty(apiKey) || Ember.isEmpty(apiUrl)) {
+    if (isEmpty(apiKey) || isEmpty(apiUrl)) {
       return;
     }
-    if (Ember.typeOf(callback) !== 'function') {
+    if (typeOf(callback) !== 'function') {
       return;
     }
     let appContext = callback(context);
@@ -121,7 +128,7 @@ export default Ember.Service.extend({
    * @return {String}           generated bugsnag error reporting url
    */
   _generateBugsnagUrl(payload, basePath, timestamp = Date.now()) {
-    payload = typeof payload === 'object' ? Ember.$.param(payload) : payload;
+    payload = typeof payload === 'object' ? $.param(payload) : payload;
     return `${basePath}?${payload}&ct=img&cb=${timestamp}`;
   }
 });

@@ -54,7 +54,7 @@ QUnit.test('it generates the appropriate payload for bugsnag', function(assert) 
     user: {
       id: 'user-id',
       userAgent: 'user-agent',
-      language: 'user-language',
+      language: 'user-language'
     },
     application: {
       url: 'application-url',
