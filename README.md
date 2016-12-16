@@ -1,4 +1,4 @@
-# ember-logging-bugsnag
+# ember-logging-bugsnag [![Build Status](https://travis-ci.com/acquia/ember-logging-bugsnag.svg?token=xpbhY9xz7Z9aqH5aUfgP&branch=master)](https://travis-ci.com/acquia/ember-logging-bugsnag)
 
 This addon provides a logging consumer for the [ember-logging-service](https://github.com/acquia/ember-logging-service/) addon.
 The consumer handles sending any error events to the [Bugsnag](https://bugsnag.com/) service.
