@@ -5,8 +5,12 @@ The consumer handles sending any error events to the [Bugsnag](https://bugsnag.c
 
 ## Configuration
 
-First you must install the ember-logging-service addon and follow instructions
-to add application and user context callbacks.  Additionally, the ember-logging-service
+First you must install the ember-logging-service addon and the ember-logging-bugsnag addon.
+```
+ember install ember-logging-service
+ember install ember-logging-bugsnag
+```
+Next follow instructions from [ember-logging-service](https://github.com/acquia/ember-logging-service/) to add application and user context callbacks.  Additionally, the ember-logging-service
 addon must be configured with `enableErrors = true`.
 
 There are two parts to configuring the Bugsnaglogging consumer.  Setting up the
